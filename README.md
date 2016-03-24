@@ -1,7 +1,7 @@
 EfgLogger
 ===============
 
-This module implements Authentication with Doctrine and support for CAS (Central Authenticate Service.
+This module implements Authentication with Doctrine and support for CAS (Central Authenticate Service).
 
 Installation and Use:
 ---------------------
