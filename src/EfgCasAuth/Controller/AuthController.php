@@ -89,8 +89,10 @@ class AuthController extends AbstractActionController
 
             // setCredential must have a password
             // but with CAS value is empty
-            $adapter->setIdentityValue(phpCAS::getUser());
-            $adapter->setCredentialValue('');
+//            $adapter->setIdentityValue(phpCAS::getUser());
+//            $adapter->setCredentialValue('');
+            $adapter->setIdentity(phpCAS::getUser());
+            $adapter->setCredential('');
 
             $authResult = $this->authService->authenticate();
 

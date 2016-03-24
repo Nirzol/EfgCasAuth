@@ -17,6 +17,10 @@ return array(
         'cas_logout_url' => '',
         'cas_redirect_route_after_login' => '', //let blank for current route, put a ZF2 route to redirect ex: home
     ),
+    'efgcasauth' => array( //property to check if user is valid before authenticate
+        'userStatus' => 1,
+        'userPassword' => '',
+    ),
 //    'get_form' => array(
 //        'user_form' => 'Ent\Form\UserForm',        
 //    ),
