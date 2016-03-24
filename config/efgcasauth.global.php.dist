@@ -1,0 +1,43 @@
+<?php
+
+// Modify with your own configuration
+return array(
+    'cas' => array(
+        'cas_version' => '2.0',
+        'cas_hostname' => 'your_cas_hostname',
+        'cas_port' => 443,
+        'cas_path' => '/cas',
+        'no_account_route' => 'zfcadmin/user/add-auto', // Add new user in database, you have to implement this fonction in your application
+        'cas_server_ca_cert_path' => dirname(dirname(__DIR__)) . '/data/certificat_cas.pem',
+        'cas_proxy' => false,
+        'cas_debug_file' => dirname(dirname(__DIR__)) . '/data/cas_debug.log',
+        'cas_debug' => true,
+        'cas_validation' => true, // Check certificat or not
+        'cas_login_url' => '',
+        'cas_logout_url' => '',
+        'cas_redirect_route_after_login' => '', //let blank for current route, put a ZF2 route to redirect ex: home
+    ),
+//    'get_form' => array(
+//        'user_form' => 'Ent\Form\UserForm',        
+//    ),
+    // Change with your system user managment  
+    'doctrine' => array(
+        'user_doctrine_orm_service_factory' => '[YourApplication]\Service\UserDoctrineORM',
+        'authentication' => array(
+            'orm_default' => array(
+                'object_manager' => 'Doctrine\ORM\EntityManager',
+                'identity_class' => '[YourApplication]\Entity\User',
+                'identity_property' => 'Login',
+                'credential_property' => 'Password',
+//                'credential_callable' => function([YourApplication]\Entity\User $user, $passwordGiven) {
+//                    // using Bcrypt 
+//                    $bcrypt = new \Zend\Crypt\Password\Bcrypt();
+//                    $bcrypt->setSalt('m3s3Cr3tS4lty34h');
+//                    // $passwordGiven is unhashed password that inputted by user
+//                    // $user->getPassword() is hashed password that saved in db
+//                    return $bcrypt->verify($passwordGiven, $user->getPassword());
+//                },
+            ),
+        ),
+    ),
+);
