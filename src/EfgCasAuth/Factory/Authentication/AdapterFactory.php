@@ -23,7 +23,7 @@ class AdapterFactory extends BaseAdapterFactory
             $options->setObjectManager($serviceLocator->get($objectManager));
         }
         
-        $config = $serviceLocator->getServiceLocator()->get('config');
+        $config = $serviceLocator->get('config');
         
         $objectRepository = new ObjectRepository($options);
         $objectRepository->setConfig($config);
