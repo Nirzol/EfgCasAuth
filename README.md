@@ -1,4 +1,4 @@
-EfgCasAUth
+EfgCasAuth
 ===============
 
 This module implements ZF2 (Zend Framework 2) Authentication with Doctrine and support for CAS (Central Authenticate Service).
