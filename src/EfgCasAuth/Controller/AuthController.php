@@ -78,6 +78,8 @@ class AuthController extends AbstractActionController
 
             // Clear la session ZF2
             $this->authService->clearIdentity();
+            $manager = new \Zend\Session\SessionManager();
+            $manager->destroy();
 
             // Logout de CAS
             $url = $this->url()->fromRoute('home', array(), array('force_canonical' => true));
