@@ -136,6 +136,9 @@ class AuthController extends AbstractActionController
         }
 
         $this->authService->clearIdentity();
+        
+        $manager = new \Zend\Session\SessionManager();
+        $manager->destroy();
 
         $configCas = $this->configCas;
 
