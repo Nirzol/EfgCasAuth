@@ -71,7 +71,7 @@ class AuthController extends AbstractActionController
         }
 
         // Handle SingleLogout SLO
-        phpCAS::handleLogoutRequests(true);
+        phpCAS::handleLogoutRequests();
 
         // Check for logout request
         if (isset($_REQUEST['logout'])) {
@@ -140,7 +140,8 @@ class AuthController extends AbstractActionController
         $this->authService->clearIdentity();
         
         $manager = new \Zend\Session\SessionManager();
-        $manager->destroy();
+//        $manager->destroy();
+        $manager->forgetMe();
 
         $configCas = $this->configCas;
 
@@ -164,7 +165,7 @@ class AuthController extends AbstractActionController
             phpCAS::setNoCasServerValidation();
         }
 
-        phpCAS::handleLogoutRequests(true);
+        phpCAS::handleLogoutRequests();
 
         $url = $this->url()->fromRoute('home', array(), array('force_canonical' => true));
 
