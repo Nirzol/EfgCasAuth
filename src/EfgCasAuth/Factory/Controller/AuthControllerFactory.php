@@ -16,10 +16,12 @@ class AuthControllerFactory implements FactoryInterface
         $sm = $serviceLocator->getServiceLocator();
 
         $authService = $sm->get('Zend\Authentication\AuthenticationService');
+        $session = $sm->get('Zend\Session\SessionManager');
+
 
         $config = $sm->get('Config');
 
-        $authController = new AuthController($authService, $config['cas']);
+        $authController = new AuthController($authService,$session, $config['cas']);
 
         return $authController;
     }

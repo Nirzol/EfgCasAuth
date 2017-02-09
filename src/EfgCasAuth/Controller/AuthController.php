@@ -7,6 +7,7 @@ use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Http\Request;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Session\Container;
+use Zend\Session\SessionManager;
 
 class AuthController extends AbstractActionController
 {
@@ -23,12 +24,15 @@ class AuthController extends AbstractActionController
     protected $authService = null;
     protected $configCas = null;
     protected $cas_inited = null;
+    protected $session = null;
 
-    public function __construct(AuthenticationServiceInterface $authService, $configCas)
+    public function __construct(AuthenticationServiceInterface $authService, SessionManager $session, $configCas)
     {
         $this->authService = $authService;
         $this->configCas = $configCas;
         $this->cas_inited = false;
+
+        $this->session=$session;
     }
 
     public function loginAction()
@@ -42,6 +46,11 @@ class AuthController extends AbstractActionController
 
     private function authenticate()
     {
+
+
+
+
+
         $configCas = $this->configCas;
 
         // Enable debugging
@@ -77,10 +86,11 @@ class AuthController extends AbstractActionController
         if (isset($_REQUEST['logout'])) {
 
             // Clear la session ZF2
+            //youcef  $manager = new \Zend\Session\SessionManager();
+            //$manager->forgetMe();
+            $this->session->forgetMe();
             $this->authService->clearIdentity();
-            $manager = new \Zend\Session\SessionManager();
-    //        $manager->destroy();
-            $manager->forgetMe();
+
             // Logout de CAS
             $url = $this->url()->fromRoute('home', array(), array('force_canonical' => true));
             phpCAS::logout(array('url' => $url, 'service' => $url));
@@ -136,12 +146,11 @@ class AuthController extends AbstractActionController
         if (!$this->authService->hasIdentity()) {
             return $this->redirect()->toRoute('home');
         }
-
+        //YOUCEF
+        //$manager = new \Zend\Session\SessionManager();
+        //$manager->forgetMe();
+        $this->session->forgetMe();
         $this->authService->clearIdentity();
-        
-        $manager = new \Zend\Session\SessionManager();
-//        $manager->destroy();
-        $manager->forgetMe();
 
         $configCas = $this->configCas;
 
@@ -170,7 +179,6 @@ class AuthController extends AbstractActionController
         $url = $this->url()->fromRoute('home', array(), array('force_canonical' => true));
 
         phpCAS::logout(array('url' => $url, 'service' => $url));
-
         return $this->redirect()->toRoute('home');
     }
 
