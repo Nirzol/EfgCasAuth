@@ -32,7 +32,7 @@ class AuthController extends AbstractActionController
         $this->configCas = $configCas;
         $this->cas_inited = false;
 
-        $this->session=$session;
+        $this->session = $session;
     }
 
     public function loginAction()
@@ -46,11 +46,6 @@ class AuthController extends AbstractActionController
 
     private function authenticate()
     {
-
-
-
-
-
         $configCas = $this->configCas;
 
         // Enable debugging
@@ -80,11 +75,10 @@ class AuthController extends AbstractActionController
         }
 
         // Handle SingleLogout SLO
-        phpCAS::handleLogoutRequests();
+        phpCAS::handleLogoutRequests(false);
 
         // Check for logout request
         if (isset($_REQUEST['logout'])) {
-
             // Clear la session ZF2
             //youcef  $manager = new \Zend\Session\SessionManager();
             //$manager->forgetMe();
