@@ -123,7 +123,8 @@ class AuthController extends AbstractActionController
                 $container = new Container('noAuth');
                 $container->login = $authResult->getIdentity();
                 $container->loginMessage = $authResult->getMessages();
-                $redirectTo = $this->redirect()->toRoute($configCas['no_account_route']);
+//                $redirectTo = $this->redirect()->toRoute($configCas['no_account_route']);
+                $redirectTo = $this->url()->fromRoute($configCas['no_account_route'], array(), array('force_canonical' => true));
             }
         } else {
             // hey, authenticate
