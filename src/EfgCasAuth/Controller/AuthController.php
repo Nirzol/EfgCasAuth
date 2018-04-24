@@ -79,7 +79,7 @@ class AuthController extends AbstractActionController
 
         $serviceUrl = $this->url()->fromRoute('login', array(), array('force_canonical' => true));
         $serviceUrl = str_replace( 'http://', 'https://', $serviceUrl );
-        phpCAS::setFixedServiceURL($serviceUrl);
+        //phpCAS::setFixedServiceURL($serviceUrl);
 
         // Check for logout request
         if (isset($_REQUEST['logout'])) {
