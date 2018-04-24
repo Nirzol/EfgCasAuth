@@ -77,6 +77,10 @@ class AuthController extends AbstractActionController
         // Handle SingleLogout SLO
         phpCAS::handleLogoutRequests(false);
 
+        $serviceUrl = $this->url()->fromRoute('login', array(), array('force_canonical' => true));
+        $serviceUrl = str_replace( 'http://', 'https://', $serviceUrl );
+        phpCAS::setFixedServiceURL($serviceUrl);
+
         // Check for logout request
         if (isset($_REQUEST['logout'])) {
             // Clear la session ZF2
